@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fundacionreinaelizabeth.com/sitemap.xml
