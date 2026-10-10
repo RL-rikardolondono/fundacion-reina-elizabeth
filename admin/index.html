@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de administración | fundacionreinaelizabeth.com</title>
+<link rel="icon" href="/img/logo/logo-fundacion.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#0B4F8A;--azul2:#1867B0;--verde:#14A38B;--verde-osc:#0E8571;--wa:#1F8A4C;--fondo:#F4F8FB;--texto:#1C2B39;--suave:#5D6B78;--borde:#DCE5EE;--azul-claro:#E8F1FA;--verde-claro:#E3F6F2;--rojo:#C0392B;--rojo-claro:#FDECEA}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:'Public Sans',system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:'Barlow Condensed',system-ui,sans-serif;margin:0 0 .4em;line-height:1.15}
+h1{font-size:2rem}h2{font-size:1.6rem}h3{font-size:1.25rem}
+a{color:var(--azul2)}
+.oculto{display:none!important}
+.barra{background:#fff;box-shadow:0 2px 12px rgba(28,43,57,.08);position:sticky;top:0;z-index:20}
+.barra__in{max-width:1100px;margin:0 auto;padding:0 16px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.marca{display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',system-ui,sans-serif;font-weight:700;font-size:1.2rem}
+.marca svg{width:36px;height:36px;flex:none}
+.marca small{display:block;font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:.75rem;color:var(--suave)}
+.acciones-barra{display:flex;gap:8px;flex-wrap:wrap}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+.caja{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px;box-shadow:0 2px 14px rgba(11,79,138,.06);margin-bottom:18px}
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:10px;border:0;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap}
+.boton:disabled{opacity:.55;cursor:not-allowed}
+.b-principal{background:var(--azul);color:#fff}.b-principal:hover{background:var(--azul2)}
+.b-accion{background:var(--verde);color:#fff}.b-accion:hover{background:var(--verde-osc)}
+.b-borde{background:#fff;color:var(--azul);border:1.5px solid var(--borde)}.b-borde:hover{border-color:var(--azul2)}
+.b-peligro{background:#fff;color:var(--rojo);border:1.5px solid #f1c6c0}.b-peligro:hover{background:var(--rojo-claro)}
+.b-chico{padding:6px 11px;font-size:.88rem}
+.b-grande{padding:14px 24px;font-size:1.05rem}
+label{display:block;font-weight:600;margin:14px 0 6px}
+.ayuda{font-weight:400;color:var(--suave);font-size:.88rem;margin-top:4px}
+input[type=text],input[type=url],input[type=email],input[type=date],input[type=password],input[type=tel],select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--borde);border-radius:10px;font:inherit;background:#fff;color:var(--texto)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px var(--verde-claro)}
+textarea{min-height:240px;resize:vertical;line-height:1.6}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.fila{grid-template-columns:1fr}}
+.pestanas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.pestana{background:#fff;border:1.5px solid var(--borde);padding:10px 16px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;color:var(--texto)}
+.pestana[aria-selected=true]{background:var(--verde);border-color:var(--verde);color:#fff}
+.lista{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--borde);border-radius:12px;padding:10px}
+.item img{width:84px;height:62px;object-fit:cover;border-radius:8px;background:var(--azul-claro);flex:none}
+.item.libro img{width:46px;height:68px}
+.item__txt{flex:1;min-width:0}
+.item__txt b{display:block;overflow:hidden;text-overflow:ellipsis}
+.item__txt span{color:var(--suave);font-size:.88rem}
+.item__btn{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:600px){.item{flex-wrap:wrap}.item__btn{width:100%;justify-content:flex-start}}
+.fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:10px}
+.foto{border:2px solid var(--borde);border-radius:12px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.foto.portada{border-color:var(--verde)}
+.foto img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.foto div{display:flex;flex-direction:column;gap:4px;padding:6px}
+.foto .marca-portada{background:var(--verde);color:#fff;font-size:.78rem;font-weight:700;text-align:center;padding:3px}
+.subir{border:2px dashed var(--borde);border-radius:12px;padding:18px;text-align:center;background:var(--azul-claro);cursor:pointer;color:var(--azul);font-weight:600}
+.subir:hover{border-color:var(--azul2)}
+.herramientas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.aviso{padding:12px 14px;border-radius:10px;margin:12px 0;font-weight:500}
+.aviso.ok{background:var(--verde-claro);color:var(--verde-osc)}
+.aviso.error{background:var(--rojo-claro);color:var(--rojo)}
+.aviso.info{background:var(--azul-claro);color:var(--azul)}
+.pie-acciones{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--borde)}
+.cargando{position:fixed;inset:0;background:rgba(244,248,251,.88);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:100;font-weight:600;color:var(--azul);text-align:center;padding:20px}
+.rueda{width:46px;height:46px;border:5px solid var(--azul-claro);border-top-color:var(--verde);border-radius:50%;animation:g 1s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+.pasos{padding-left:22px}.pasos li{margin-bottom:8px}
+.ingreso{max-width:520px;margin:40px auto}
+.proyecto-fila{display:grid;grid-template-columns:1fr 1.4fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}
+@media(max-width:700px){.proyecto-fila{grid-template-columns:1fr}}
+.cifra-fila{display:grid;grid-template-columns:.6fr 1.4fr;gap:8px;margin-bottom:8px}
+.firma{text-align:center;color:var(--suave);font-size:.82rem;padding:20px 16px 30px}
+.firma svg{width:18px;height:18px;vertical-align:-4px}
+.chk{display:flex;gap:8px;align-items:center;font-weight:500;margin-top:12px}
+.chk input{width:18px;height:18px}
+.cab-lista{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.testimonio-fila{display:grid;gap:8px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--borde)}
+.testimonio-fila .boton{justify-self:start}
+input[type=number]{font:inherit}
+</style>
+</head>
+<body>
+<header class="barra"><div class="barra__in">
+  <div class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true"><rect x="4" y="4" width="192" height="192" rx="46" fill="#0B4F8A"/><g stroke="#FFFFFF" stroke-linecap="round"><polygon points="100,42 150.2,71 150.2,129 100,158 49.8,129 49.8,71" fill="none" stroke-opacity=".35" stroke-width="4"/><path d="M100 100L100 42M100 100L150.2 71M100 100L150.2 129M100 100L100 158M100 100L49.8 129M100 100L49.8 71" stroke-width="6"/></g><g fill="#FFFFFF"><circle cx="150.2" cy="71" r="10"/><circle cx="150.2" cy="129" r="10"/><circle cx="100" cy="158" r="10"/><circle cx="49.8" cy="129" r="10"/><circle cx="49.8" cy="71" r="10"/></g><circle cx="100" cy="42" r="13" fill="#E0A21A"/><circle cx="100" cy="100" r="20" fill="#E0A21A"/></svg>
+    <div>Panel de la web<small id="nombre-sitio"></small></div></div>
+  <div class="acciones-barra oculto" id="acciones-barra">
+    <a class="boton b-borde b-chico" href="/" target="_blank" rel="noopener">Ver la web</a>
+    <button class="boton b-borde b-chico" type="button" id="btn-salir">Salir</button>
+  </div>
+</div></header>
+
+<main>
+  <!-- INGRESO -->
+  <section id="vista-ingreso" class="ingreso">
+    <div class="caja">
+      <h1>Entrar al panel</h1>
+      <p>Pegue aquí la <b>llave de acceso</b> de GitHub de esta web. Esta llave solo sirve para esta web y queda guardada únicamente en este equipo.</p>
+      <label for="llave">Llave de acceso</label>
+      <input type="password" id="llave" autocomplete="off" placeholder="github_pat_…">
+      <label class="chk"><input type="checkbox" id="recordar" checked> Recordar en este equipo (no lo marque en computadores ajenos)</label>
+      <div id="aviso-ingreso"></div>
+      <div class="pie-acciones"><button class="boton b-principal b-grande" id="btn-entrar" type="button">Entrar</button></div>
+    </div>
+    <details class="caja">
+      <summary><b>¿No tiene la llave? Cómo crearla (una sola vez)</b></summary>
+      <ol class="pasos">
+        <li>Inicie sesión en GitHub y abra <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">esta página para crear la llave</a>.</li>
+        <li>En <b>Token name</b> escriba: <i id="nombre-llave"></i>. En <b>Expiration</b> elija <b>No expiration</b> (o la fecha que prefiera).</li>
+        <li>En <b>Repository access</b> elija <b>Only select repositories</b> y marque solo el repositorio <b id="nombre-repo"></b>.</li>
+        <li>En <b>Permissions → Repository permissions</b>, busque <b>Contents</b> y cámbielo a <b>Read and write</b>. No active nada más.</li>
+        <li>Pulse <b>Generate token</b>, copie la llave (empieza por <code>github_pat_</code>) y péguela arriba.</li>
+      </ol>
+      <p class="ayuda">Cada persona del equipo puede tener su propia llave (créela igual, con su nombre). Si una llave se pierde o alguien la vio, bórrela en GitHub y cree otra.</p>
+    </details>
+  </section>
+
+  <!-- PANEL -->
+  <section id="vista-panel" class="oculto">
+    <div class="pestanas" role="tablist">
+      <button class="pestana" role="tab" aria-selected="true" data-pestana="noticias">Noticias</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="proyectos">Programas y proyectos</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="general">Inicio, cifras y contacto</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="revista">Revista</button>
+    </div>
+    <div id="aviso-panel"></div>
+
+    <!-- Listas -->
+    <div data-panel="noticias">
+      <div class="caja cab-lista">
+        <div><h2 style="margin:0">Noticias</h2><span class="ayuda">Eventos, actividades y novedades. Las tres más recientes salen en la página de inicio.</span></div>
+        <button class="boton b-accion b-grande" type="button" data-nuevo="noticia">+ Nueva noticia</button>
+      </div>
+      <div class="lista" id="lista-noticias"></div>
+    </div>
+    <div data-panel="proyectos" class="oculto">
+      <div class="caja cab-lista">
+        <div><h2 style="margin:0">Programas y proyectos</h2><span class="ayuda">Cada uno tiene su propia página con texto, fotos y recuadro de donación.</span></div>
+        <button class="boton b-accion b-grande" type="button" data-nuevo="proyecto">+ Nuevo proyecto</button>
+      </div>
+      <div class="lista" id="lista-proyectos"></div>
+    </div>
+
+    <!-- Editor (noticias y proyectos) -->
+    <div data-panel="editor" class="oculto">
+      <div class="caja">
+        <h2 id="titulo-editor">Nueva noticia</h2>
+        <label for="e-titulo">Título</label>
+        <input type="text" id="e-titulo" maxlength="180">
+        <div class="fila solo-noticia">
+          <div><label for="e-categoria">Categoría</label><input type="text" id="e-categoria" list="cats-noticia" placeholder="Eventos"><datalist id="cats-noticia"></datalist></div>
+          <div><label for="e-fecha">Fecha</label><input type="date" id="e-fecha"></div>
+        </div>
+        <div class="solo-proyecto">
+          <div class="fila">
+            <div><label for="e-corto">Nombre corto <span class="ayuda">(para el menú)</span></label><input type="text" id="e-corto" maxlength="40"></div>
+            <div><label for="e-etiqueta">Etiqueta <span class="ayuda">(ej.: Programa, Proyecto cultural)</span></label><input type="text" id="e-etiqueta" maxlength="40"></div>
+          </div>
+          <label for="e-resumen">Resumen <span class="ayuda">(una o dos frases; sale en la tarjeta y bajo el título)</span></label>
+          <input type="text" id="e-resumen" maxlength="260">
+          <div class="fila">
+            <div><label for="e-orden">Orden <span class="ayuda">(1 sale primero)</span></label><input type="number" id="e-orden" min="1" max="99" style="width:100%;padding:11px 12px;border:1.5px solid var(--borde);border-radius:10px;font:inherit"></div>
+            <div>
+              <label class="chk"><input type="checkbox" id="e-menu"> Mostrar en el menú de arriba</label>
+              <label class="chk"><input type="checkbox" id="e-inicio"> Mostrar en la página de inicio</label>
+              <label class="chk"><input type="checkbox" id="e-apoyo"> Mostrar recuadro de donación (llave Bre-B)</label>
+            </div>
+          </div>
+        </div>
+        <label for="e-texto">Texto</label>
+        <div class="herramientas">
+          <button class="boton b-borde b-chico" type="button" data-formato="subtitulo">Subtítulo</button>
+          <button class="boton b-borde b-chico" type="button" data-formato="negrita">Negrita</button>
+          <button class="boton b-borde b-chico" type="button" data-formato="vineta">Viñeta</button>
+        </div>
+        <textarea id="e-texto" placeholder="Escriba aquí. Deje una línea en blanco entre párrafos."></textarea>
+        <div class="ayuda">Una línea en blanco separa los párrafos. Las direcciones web (https://…) se convierten solas en enlaces.</div>
+
+        <label>Foto principal</label>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <img id="e-portada-vista" alt="" style="width:160px;height:110px;object-fit:cover;border-radius:10px;background:var(--azul-claro)">
+          <label class="subir" for="e-portada" style="margin:0;flex:1">📷 Elegir foto principal</label>
+          <input type="file" id="e-portada" accept="image/*" class="oculto">
+          <button class="boton b-peligro b-chico" type="button" id="e-quitar-portada">Quitar</button>
+        </div>
+
+        <label>Galería de fotos</label>
+        <label class="subir" for="e-fotos">📷 Pulse aquí para agregar fotos a la galería (puede elegir varias)</label>
+        <input type="file" id="e-fotos" accept="image/*" multiple class="oculto">
+        <div class="ayuda">Las fotos se reducen solas para que la web cargue rápido. Recuerde: en fotos de niños, use imágenes autorizadas o con el rostro difuminado.</div>
+        <div class="fotos" id="e-lista-fotos"></div>
+        <div class="solo-proyecto fila">
+          <div><label for="e-tgaleria">Título de la galería <span class="ayuda">(opcional)</span></label><input type="text" id="e-tgaleria" maxlength="80"></div>
+          <div><label for="e-ngaleria">Nota bajo el título de la galería <span class="ayuda">(opcional)</span></label><input type="text" id="e-ngaleria" maxlength="240"></div>
+        </div>
+
+        <div class="fila">
+          <div><label for="e-video">Video de YouTube <span class="ayuda">(opcional)</span></label><input type="url" id="e-video" placeholder="https://www.youtube.com/watch?v=…"></div>
+          <div><label for="e-enlace">Botón con enlace <span class="ayuda">(opcional)</span></label><input type="url" id="e-enlace" placeholder="https://…">
+            <input type="text" id="e-textoenlace" placeholder="Texto del botón, ej.: Inscribirse" style="margin-top:8px"></div>
+        </div>
+        <div id="aviso-editor"></div>
+        <div class="pie-acciones">
+          <button class="boton b-borde" type="button" id="btn-cancelar">Cancelar</button>
+          <button class="boton b-borde" type="button" id="btn-vista">Vista previa</button>
+          <button class="boton b-accion b-grande" type="button" id="btn-publicar">Publicar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- General -->
+    <div data-panel="general" class="oculto">
+      <div class="caja">
+        <h2>Portada de la página de inicio</h2>
+        <label for="g-herotitulo">Título grande</label><input type="text" id="g-herotitulo" maxlength="80">
+        <label for="g-herotexto">Texto bajo el título</label><input type="text" id="g-herotexto" maxlength="300">
+        <label>Foto de fondo</label>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <img id="g-herofoto-vista" alt="" style="width:180px;height:110px;object-fit:cover;border-radius:10px;background:var(--azul-claro)">
+          <label class="subir" for="g-herofoto" style="margin:0;flex:1">Cambiar foto de fondo</label><input type="file" id="g-herofoto" accept="image/*" class="oculto">
+        </div>
+      </div>
+      <div class="caja">
+        <h2>Cifras de la Fundación</h2>
+        <div class="ayuda">Ej.: «5.287» y «Personas beneficiadas». Deje vacío el número para no mostrar esa cifra.</div>
+        <div id="g-cifras"></div>
+      </div>
+      <div class="caja">
+        <h2>Nuestra fundación</h2>
+        <label for="g-nostitulo">Título</label><input type="text" id="g-nostitulo" maxlength="100">
+        <label for="g-nostexto">Texto</label><textarea id="g-nostexto" style="min-height:200px"></textarea>
+        <label>Foto</label>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <img id="g-nosfoto-vista" alt="" style="width:150px;height:150px;object-fit:cover;border-radius:10px;background:var(--azul-claro)">
+          <label class="subir" for="g-nosfoto" style="margin:0;flex:1">Cambiar foto</label><input type="file" id="g-nosfoto" accept="image/*" class="oculto">
+        </div>
+      </div>
+      <div class="caja">
+        <h2>Testimonios</h2>
+        <div id="g-testimonios"></div>
+        <button class="boton b-borde b-chico" type="button" id="btn-mas-testimonio">+ Agregar testimonio</button>
+      </div>
+      <div class="caja">
+        <h2>Contacto y donaciones</h2>
+        <label for="c-direccion">Dirección</label><input type="text" id="c-direccion">
+        <div class="fila">
+          <div><label for="c-correo">Correo</label><input type="email" id="c-correo"></div>
+          <div><label for="c-whatsapp">WhatsApp <span class="ayuda">(solo números)</span></label><input type="tel" id="c-whatsapp"></div>
+        </div>
+        <label for="c-instagram">Instagram <span class="ayuda">(dirección completa)</span></label><input type="url" id="c-instagram">
+        <div class="fila">
+          <div><label for="g-llave">Llave Bre-B para donaciones</label><input type="text" id="g-llave"></div>
+          <div><label for="g-nit">NIT</label><input type="text" id="g-nit"></div>
+        </div>
+      </div>
+      <div id="aviso-general"></div>
+      <div class="pie-acciones"><button class="boton b-accion b-grande" type="button" id="btn-guardar-general">Publicar cambios</button></div>
+    </div>
+
+    <!-- Revista -->
+    <div data-panel="revista" class="oculto">
+      <div class="caja">
+        <h2>Ficha de la Revista Colombiana de Medicina</h2>
+        <div class="aviso info">Esta ficha sale en fundacionreinaelizabeth.com/publicaciones/ y declara a la Fundación como entidad editora (la usa Latindex). Cambie solo datos que sean oficiales.</div>
+        <div class="fila">
+          <div><label for="r-titulo">Título</label><input type="text" id="r-titulo"></div>
+          <div><label for="r-issn">ISSN</label><input type="text" id="r-issn"></div>
+        </div>
+        <div class="fila">
+          <div><label for="r-editor">Editor</label><input type="text" id="r-editor"></div>
+          <div><label for="r-periodicidad">Periodicidad</label><input type="text" id="r-periodicidad"></div>
+        </div>
+        <label for="r-acceso">Acceso y licencia</label><input type="text" id="r-acceso">
+        <div class="fila">
+          <div><label for="r-web">Sitio web</label><input type="url" id="r-web"></div>
+          <div><label for="r-correo">Correo de la revista</label><input type="email" id="r-correo"></div>
+        </div>
+        <label for="r-lugar">Lugar de edición</label><input type="text" id="r-lugar">
+      </div>
+      <div id="aviso-revista"></div>
+      <div class="pie-acciones"><button class="boton b-accion b-grande" type="button" id="btn-guardar-revista">Publicar cambios</button></div>
+    </div>
+  </section>
+</main>
+<p class="firma">Panel desarrollado por SkyNet Genesis · contacto@skynetgenesis.com · WhatsApp 3044375758</p>
+
+<div class="cargando oculto" id="cargando"><div class="rueda"></div><div id="cargando-texto">Cargando…</div></div>
+
+<script src="/js/formato.js"></script>
+<script>
+/* ===== Configuración de esta web (cambiar solo esto al copiar el panel a otra web) ===== */
+var CONFIG = {
+  dueno: 'RL-rikardolondono',            // usuario de GitHub
+  repo: 'fundacion-reina-elizabeth',     // repositorio de la web
+  rama: 'main',
+  sitio: 'fundacionreinaelizabeth.com',
+  claveLocal: 'panel-fundacion-llave'
+};
+/* ======================================================================================= */
+
+var F = window.Formato;
+var API = 'https://api.github.com/repos/' + CONFIG.dueno + '/' + CONFIG.repo;
+var estado = { llave: '', sitio: null, proyectos: null, noticias: null, commitBase: '', cambiosSinGuardar: false };
+var nuevasImagenes = {};   // ruta -> dataURL (pendientes de subir)
+var borrarRutas = [];      // rutas a borrar en el próximo guardado (si ya no se usan)
+var pendientesGeneral = {};
+
+function $(id) { return document.getElementById(id); }
+function aviso(id, tipo, txt) { var el = $(id); el.innerHTML = ''; if (!txt) return; var d = document.createElement('div'); d.className = 'aviso ' + tipo; d.textContent = txt; el.appendChild(d); if (tipo !== 'info') d.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+function cargando(on, txt) { $('cargando').classList.toggle('oculto', !on); $('cargando-texto').textContent = txt || 'Cargando…'; }
+function leerLS(k) { try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ''; } catch (e) { return ''; } }
+function guardarLS(k, v, recordar) { try { (recordar ? localStorage : sessionStorage).setItem(k, v); } catch (e) {} }
+function borrarLS(k) { try { localStorage.removeItem(k); sessionStorage.removeItem(k); } catch (e) {} }
+function clonar(o) { return JSON.parse(JSON.stringify(o)); }
+function boton(txt, clases, fn) { var b = document.createElement('button'); b.type = 'button'; b.className = 'boton ' + clases; b.textContent = txt; b.onclick = fn; return b; }
+
+$('nombre-sitio').textContent = CONFIG.sitio;
+$('nombre-repo').textContent = CONFIG.repo;
+$('nombre-llave').textContent = 'Panel ' + CONFIG.sitio;
+
+/* ---------- GitHub ---------- */
+function gh(ruta, op) {
+  op = op || {};
+  var h = { 'Authorization': 'Bearer ' + estado.llave, 'Accept': op.accept || 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  if (op.body) h['Content-Type'] = 'application/json';
+  return fetch(ruta.indexOf('http') === 0 ? ruta : API + ruta, { method: op.method || 'GET', headers: h, body: op.body ? JSON.stringify(op.body) : undefined, cache: 'no-store' })
+    .then(function (r) {
+      if (op.accept === 'application/vnd.github.raw') return r.ok ? r.text() : r.text().then(function (t) { throw errorGH(r.status, t); });
+      return r.text().then(function (t) { var j = t ? JSON.parse(t) : {}; if (!r.ok) throw errorGH(r.status, j.message || t); return j; });
+    }, function () { throw errorGH(0); });
+}
+function errorGH(st, msg) {
+  var e = new Error(msg); e.status = st;
+  if (st === 401) e.message = 'La llave no es válida o ya venció. Cree una nueva en GitHub y vuelva a entrar.';
+  else if (st === 403) e.message = 'La llave no tiene permiso para escribir en esta web. Revise que tenga «Contents: Read and write» sobre el repositorio ' + CONFIG.repo + '.';
+  else if (st === 404) e.message = 'No se encontró el repositorio ' + CONFIG.repo + ' con esta llave. Revise que la llave tenga acceso a ese repositorio.';
+  else if (!st) e.message = 'No hay conexión a internet. Intente de nuevo.';
+  return e;
+}
+function leerArchivo(ruta) { return gh('/contents/' + ruta + '?ref=' + CONFIG.rama, { accept: 'application/vnd.github.raw' }); }
+function refActual() { return gh('/git/ref/heads/' + CONFIG.rama).then(function (r) { return r.object.sha; }); }
+
+// Sube en UN solo cambio: páginas, imágenes nuevas y archivos a borrar.
+function confirmarCambios(textos, imagenes, borrar, mensaje) {
+  var base, arbolBase;
+  return refActual().then(function (sha) {
+    if (estado.commitBase && sha !== estado.commitBase) {
+      var e = new Error('La web fue modificada desde otro lugar mientras usted trabajaba. Pulse «Recargar» para traer la versión más reciente (copie antes su texto si no quiere perderlo).');
+      e.recargar = true; throw e;
+    }
+    base = sha;
+    return gh('/git/commits/' + sha);
+  }).then(function (c) {
+    arbolBase = c.tree.sha;
+    var rutas = Object.keys(imagenes);
+    return rutas.reduce(function (p, ruta, i) {
+      return p.then(function (acc) {
+        cargando(true, 'Subiendo foto ' + (i + 1) + ' de ' + rutas.length + '…');
+        return gh('/git/blobs', { method: 'POST', body: { content: imagenes[ruta].split(',')[1], encoding: 'base64' } })
+          .then(function (b) { acc.push({ path: ruta.replace(/^\//, ''), mode: '100644', type: 'blob', sha: b.sha }); return acc; });
+      });
+    }, Promise.resolve([]));
+  }).then(function (arbol) {
+    cargando(true, 'Publicando…');
+    Object.keys(textos).forEach(function (ruta) { arbol.push({ path: ruta, mode: '100644', type: 'blob', content: textos[ruta] }); });
+    borrar.forEach(function (ruta) { arbol.push({ path: ruta.replace(/^\//, ''), mode: '100644', type: 'blob', sha: null }); });
+    return gh('/git/trees', { method: 'POST', body: { base_tree: arbolBase, tree: arbol } });
+  }).then(function (t) {
+    return gh('/git/commits', { method: 'POST', body: { message: mensaje, tree: t.sha, parents: [base] } });
+  }).then(function (c) {
+    return gh('/git/refs/heads/' + CONFIG.rama, { method: 'PATCH', body: { sha: c.sha } }).then(function () { estado.commitBase = c.sha; return c; });
+  });
+}
+
+function candidato() { return { sitio: clonar(estado.sitio), proyectos: clonar(estado.proyectos), noticias: clonar(estado.noticias) }; }
+function textoDatos(d) { return JSON.stringify(d.sitio) + JSON.stringify(d.proyectos) + JSON.stringify(d.noticias); }
+// ¿Se usa la imagen (o la foto de la que es miniatura)?
+function usada(ruta, d) {
+  var s = textoDatos(d || estado);
+  if (s.indexOf('"' + ruta + '"') >= 0) return true;
+  var m = ruta.match(/^(.*)\/mini\/([^\/]+)$/);
+  return !!(m && s.indexOf('"' + m[1] + '/' + m[2] + '"') >= 0);
+}
+// Archivos que hay que crear o borrar si cambia la lista de páginas (ej. al eliminar una noticia)
+function paginasDe(d) { return Object.keys(F.generarTodo(d.sitio, { proyectos: d.proyectos }, { noticias: d.noticias }, 2000)); }
+
+function publicar(cand, mensaje, avisoId, alTerminar) {
+  cargando(true, 'Preparando…');
+  var paginas = F.generarTodo(cand.sitio, { proyectos: cand.proyectos }, { noticias: F.ordenarNoticias(cand.noticias) }, new Date().getFullYear());
+  paginas['datos/sitio.json'] = JSON.stringify(cand.sitio, null, 1);
+  paginas['datos/proyectos.json'] = JSON.stringify({ proyectos: cand.proyectos }, null, 1);
+  paginas['datos/noticias.json'] = JSON.stringify({ noticias: F.ordenarNoticias(cand.noticias) }, null, 1);
+  var imgs = {}; Object.keys(nuevasImagenes).forEach(function (r) { if (usada(r, cand)) imgs[r] = nuevasImagenes[r]; });
+  var nuevas = paginasDe(cand);
+  var sobran = paginasDe(estado).filter(function (p) { return nuevas.indexOf(p) < 0; });
+  var borrar = borrarRutas.filter(function (r) { return !usada(r, cand) && !nuevasImagenes[r]; }).concat(sobran);
+  return confirmarCambios(paginas, imgs, borrar, mensaje).then(function () {
+    estado.sitio = cand.sitio; estado.proyectos = cand.proyectos; estado.noticias = cand.noticias;
+    nuevasImagenes = {}; borrarRutas = []; pendientesGeneral = {}; estado.cambiosSinGuardar = false;
+    cargando(false);
+    if (alTerminar) alTerminar();
+    aviso('aviso-panel', 'ok', '✔ Publicado. La web se actualiza en 1 o 2 minutos (si no ve el cambio, recargue la página de la web).');
+    return true;
+  }).catch(function (e) {
+    cargando(false);
+    aviso(avisoId, 'error', 'No se pudo publicar: ' + e.message);
+    if (e.recargar) { var b = boton('Recargar', 'b-principal b-chico', function () { estado.cambiosSinGuardar = false; location.reload(); }); b.style.marginTop = '8px'; $(avisoId).appendChild(b); }
+    return false;
+  });
+}
+
+/* ---------- Ingreso ---------- */
+function entrar(llave, recordar) {
+  estado.llave = llave.trim();
+  if (!/^(github_pat_|ghp_)/.test(estado.llave)) { aviso('aviso-ingreso', 'error', 'Eso no parece una llave de GitHub. Debe empezar por «github_pat_».'); return; }
+  cargando(true, 'Entrando…');
+  gh('').then(function (repo) {
+    if (repo.permissions && !repo.permissions.push) throw errorGH(403);
+    return Promise.all([refActual(), leerArchivo('datos/sitio.json'), leerArchivo('datos/proyectos.json'), leerArchivo('datos/noticias.json')]);
+  }).then(function (r) {
+    estado.commitBase = r[0];
+    estado.sitio = JSON.parse(r[1]); estado.proyectos = JSON.parse(r[2]).proyectos || []; estado.noticias = JSON.parse(r[3]).noticias || [];
+    guardarLS(CONFIG.claveLocal, estado.llave, recordar);
+    $('vista-ingreso').classList.add('oculto'); $('vista-panel').classList.remove('oculto'); $('acciones-barra').classList.remove('oculto');
+    cargando(false); pintarListas(); pintarGeneral(); pintarRevista();
+  }).catch(function (e) {
+    cargando(false); estado.llave = '';
+    if (e.status === 401) borrarLS(CONFIG.claveLocal);
+    $('vista-ingreso').classList.remove('oculto');
+    aviso('aviso-ingreso', 'error', e.message);
+  });
+}
+$('btn-entrar').onclick = function () { entrar($('llave').value, $('recordar').checked); };
+$('llave').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar').click(); });
+$('btn-salir').onclick = function () {
+  if (estado.cambiosSinGuardar && !confirm('Tiene cambios sin publicar. ¿Salir de todos modos?')) return;
+  borrarLS(CONFIG.claveLocal); estado.cambiosSinGuardar = false; location.reload();
+};
+window.addEventListener('beforeunload', function (e) { if (estado.cambiosSinGuardar) { e.preventDefault(); e.returnValue = ''; } });
+(function () { var g = leerLS(CONFIG.claveLocal); if (g) entrar(g, true); })();
+
+/* ---------- Pestañas ---------- */
+var pestanaLista = 'noticias';
+function verPanel(nombre) {
+  document.querySelectorAll('[data-panel]').forEach(function (p) { p.classList.toggle('oculto', p.getAttribute('data-panel') !== nombre); });
+  document.querySelectorAll('.pestana').forEach(function (b) { var n = b.getAttribute('data-pestana'); b.setAttribute('aria-selected', n === nombre || (nombre === 'editor' && n === pestanaLista) ? 'true' : 'false'); });
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('.pestana').forEach(function (b) {
+  b.onclick = function () {
+    if (estado.cambiosSinGuardar && !confirm('Tiene cambios sin publicar. ¿Cambiar de sección y descartarlos?')) return;
+    if (estado.cambiosSinGuardar) descartarCambios();
+    var n = b.getAttribute('data-pestana'); if (n === 'noticias' || n === 'proyectos') pestanaLista = n;
+    aviso('aviso-panel', '', ''); verPanel(n);
+  };
+});
+function descartarCambios() { estado.cambiosSinGuardar = false; nuevasImagenes = {}; borrarRutas = []; pendientesGeneral = {}; pintarListas(); pintarGeneral(); pintarRevista(); }
+
+/* ---------- Imágenes ---------- */
+function reducirImagen(archivo, max, calidad) {
+  return new Promise(function (ok, mal) {
+    var url = URL.createObjectURL(archivo), im = new Image();
+    im.onload = function () {
+      var s = Math.min(1, max / Math.max(im.naturalWidth, im.naturalHeight));
+      var c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * s); c.height = Math.round(im.naturalHeight * s);
+      var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); ok(c.toDataURL('image/jpeg', calidad || 0.82));
+    };
+    im.onerror = function () { URL.revokeObjectURL(url); mal(new Error('No se pudo leer la foto «' + archivo.name + '». Si es una foto de iPhone (HEIC), envíesela primero por WhatsApp o tómele una captura de pantalla y súbala de nuevo.')); };
+    im.src = url;
+  });
+}
+function srcImagen(ruta) { return nuevasImagenes[ruta] || ruta || ''; }
+function nombreUnico(prefijo) { return prefijo + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5) + '.jpg'; }
+function marcarBorrar(ruta) { if (ruta && borrarRutas.indexOf(ruta) < 0) borrarRutas.push(ruta); }
+function marcarBorrarFoto(ruta) { marcarBorrar(ruta); marcarBorrar(F.mini(ruta)); }
+
+/* ---------- Listas ---------- */
+function pintarListas() {
+  var cn = $('lista-noticias'); cn.innerHTML = '';
+  var ln = F.ordenarNoticias(estado.noticias);
+  if (!ln.length) cn.innerHTML = '<div class="caja">Aún no hay noticias. Pulse «+ Nueva noticia» para publicar la primera.</div>';
+  ln.forEach(function (n) { cn.appendChild(fila(n, 'noticia', (n.categoria || 'Noticia') + (n.fecha ? ' · ' + F.fechaLarga(n.fecha) : ''), '/noticias/' + n.slug + '/')); });
+  var cp = $('lista-proyectos'); cp.innerHTML = '';
+  F.ordenarProyectos(estado.proyectos).forEach(function (p) {
+    var info = [p.etiqueta, p.enMenu ? 'en el menú' : '', p.enInicio !== false ? 'en inicio' : 'oculto en inicio'].filter(Boolean).join(' · ');
+    cp.appendChild(fila(p, 'proyecto', info, '/' + p.slug + '/'));
+  });
+  var cats = []; estado.noticias.forEach(function (n) { if (n.categoria && cats.indexOf(n.categoria) < 0) cats.push(n.categoria); });
+  ['Eventos', 'Actividades', 'Convocatorias', 'Comunicados'].forEach(function (c) { if (cats.indexOf(c) < 0) cats.push(c); });
+  $('cats-noticia').innerHTML = cats.map(function (c) { return '<option value="' + F.esc(c) + '">'; }).join('');
+}
+function fila(x, tipo, info, url) {
+  var d = document.createElement('div'); d.className = 'item';
+  var img = document.createElement('img'); img.src = srcImagen(x.portada || (x.fotos || [])[0] || '/img/logo/logo-fundacion.png'); img.alt = ''; img.loading = 'lazy';
+  var t = document.createElement('div'); t.className = 'item__txt';
+  var b = document.createElement('b'); b.textContent = x.titulo; var s = document.createElement('span'); s.textContent = info;
+  t.appendChild(b); t.appendChild(s);
+  var acc = document.createElement('div'); acc.className = 'item__btn';
+  acc.appendChild(boton('Ver', 'b-borde b-chico', function () { window.open(url, '_blank'); }));
+  acc.appendChild(boton('Editar', 'b-principal b-chico', function () { abrirEditor(tipo, x); }));
+  acc.appendChild(boton('Eliminar', 'b-peligro b-chico', function () { eliminar(tipo, x); }));
+  d.appendChild(img); d.appendChild(t); d.appendChild(acc); return d;
+}
+document.querySelectorAll('[data-nuevo]').forEach(function (b) { b.onclick = function () { abrirEditor(b.getAttribute('data-nuevo'), null); }; });
+
+/* ---------- Editor ---------- */
+var editando = null, tipoEdit = 'noticia', esNueva = false;
+function hoy() { var h = new Date(); return h.getFullYear() + '-' + String(h.getMonth() + 1).padStart(2, '0') + '-' + String(h.getDate()).padStart(2, '0'); }
+function abrirEditor(tipo, x) {
+  tipoEdit = tipo; esNueva = !x; pestanaLista = tipo === 'noticia' ? 'noticias' : 'proyectos';
+  editando = x ? clonar(x) : (tipo === 'noticia'
+    ? { slug: '', titulo: '', categoria: 'Eventos', fecha: hoy(), contenido: '', portada: '', fotos: [], video: '' }
+    : { slug: '', titulo: '', tituloCorto: '', etiqueta: 'Proyecto', resumen: '', orden: estado.proyectos.length + 1, enMenu: false, enInicio: true, apoyo: true, contenido: '', portada: '', fotos: [], video: '' });
+  editando.fotos = editando.fotos || [];
+  $('titulo-editor').textContent = (esNueva ? 'Nuevo ' : 'Editar ') + (tipo === 'noticia' ? (esNueva ? 'noticia' : 'noticia') : 'proyecto');
+  if (tipo === 'noticia') $('titulo-editor').textContent = esNueva ? 'Nueva noticia' : 'Editar noticia';
+  document.querySelectorAll('.solo-noticia').forEach(function (e) { e.classList.toggle('oculto', tipo !== 'noticia'); });
+  document.querySelectorAll('.solo-proyecto').forEach(function (e) { e.classList.toggle('oculto', tipo !== 'proyecto'); });
+  $('e-titulo').value = editando.titulo || '';
+  $('e-categoria').value = editando.categoria || ''; $('e-fecha').value = (editando.fecha || hoy()).slice(0, 10);
+  $('e-corto').value = editando.tituloCorto || ''; $('e-etiqueta').value = editando.etiqueta || ''; $('e-resumen').value = editando.resumen || '';
+  $('e-orden').value = editando.orden || 1; $('e-menu').checked = !!editando.enMenu; $('e-inicio').checked = editando.enInicio !== false; $('e-apoyo').checked = !!editando.apoyo;
+  $('e-tgaleria').value = editando.tituloGaleria || ''; $('e-ngaleria').value = editando.notaGaleria || '';
+  $('e-texto').value = editando.contenido || ''; $('e-video').value = editando.video || '';
+  $('e-enlace').value = editando.enlace || ''; $('e-textoenlace').value = editando.textoEnlace || '';
+  aviso('aviso-editor', '', ''); aviso('aviso-panel', '', '');
+  pintarPortada(); pintarFotos(); verPanel('editor'); $('e-titulo').focus();
+}
+document.querySelector('[data-panel=editor]').addEventListener('input', function () { estado.cambiosSinGuardar = true; });
+
+function pintarPortada() { if (editando.portada) $('e-portada-vista').src = srcImagen(editando.portada); else $('e-portada-vista').removeAttribute('src'); }
+$('e-portada').addEventListener('change', function () {
+  var a = this.files && this.files[0]; this.value = ''; if (!a) return;
+  cargando(true, 'Preparando foto…');
+  reducirImagen(a, 1600, 0.82).then(function (d) {
+    var carpeta = tipoEdit === 'noticia' ? 'noticias' : 'proyectos';
+    var ruta = '/img/' + carpeta + '/' + nombreUnico(F.slugify($('e-titulo').value || carpeta).slice(0, 40) || carpeta);
+    if (editando.portada) marcarBorrar(editando.portada);
+    nuevasImagenes[ruta] = d; editando.portada = ruta; estado.cambiosSinGuardar = true; pintarPortada();
+  }).catch(function (e) { aviso('aviso-editor', 'error', e.message); }).then(function () { cargando(false); });
+});
+$('e-quitar-portada').onclick = function () { if (editando.portada) marcarBorrar(editando.portada); editando.portada = ''; estado.cambiosSinGuardar = true; pintarPortada(); };
+
+function pintarFotos() {
+  var cont = $('e-lista-fotos'); cont.innerHTML = '';
+  editando.fotos.forEach(function (ruta, i) {
+    var d = document.createElement('div'); d.className = 'foto';
+    var img = document.createElement('img'); img.src = nuevasImagenes[F.mini(ruta)] || F.mini(ruta); img.alt = '';
+    var b = document.createElement('div');
+    if (i > 0) b.appendChild(boton('← Mover antes', 'b-borde b-chico', function () { var f = editando.fotos; f.splice(i - 1, 0, f.splice(i, 1)[0]); estado.cambiosSinGuardar = true; pintarFotos(); }));
+    b.appendChild(boton('Quitar', 'b-peligro b-chico', function () { editando.fotos.splice(i, 1); marcarBorrarFoto(ruta); estado.cambiosSinGuardar = true; pintarFotos(); }));
+    d.appendChild(img); d.appendChild(b); cont.appendChild(d);
+  });
+}
+$('e-fotos').addEventListener('change', function () {
+  var archivos = Array.prototype.slice.call(this.files || []); this.value = '';
+  if (!archivos.length) return;
+  var carpeta = tipoEdit === 'noticia' ? 'noticias' : 'proyectos';
+  var base = F.slugify($('e-titulo').value || editando.slug || carpeta).slice(0, 40) || carpeta;
+  cargando(true, 'Preparando fotos…');
+  archivos.reduce(function (p, a, i) {
+    return p.then(function () {
+      cargando(true, 'Preparando foto ' + (i + 1) + ' de ' + archivos.length + '…');
+      return Promise.all([reducirImagen(a, 1600, 0.82), reducirImagen(a, 480, 0.78)]).then(function (r) {
+        var ruta = '/img/' + carpeta + '/' + nombreUnico(base);
+        nuevasImagenes[ruta] = r[0]; nuevasImagenes[F.mini(ruta)] = r[1];
+        editando.fotos.push(ruta);
+      }).catch(function (e) { aviso('aviso-editor', 'error', e.message); });
+    });
+  }, Promise.resolve()).then(function () { cargando(false); estado.cambiosSinGuardar = true; pintarFotos(); });
+});
+
+document.querySelectorAll('[data-formato]').forEach(function (b) {
+  b.onclick = function () {
+    var ta = $('e-texto'), ini = ta.selectionStart, fin = ta.selectionEnd, v = ta.value, sel = v.slice(ini, fin);
+    var tipo = b.getAttribute('data-formato'), nuevo;
+    if (tipo === 'negrita') nuevo = '**' + (sel || 'texto en negrita') + '**';
+    else if (tipo === 'subtitulo') nuevo = (ini > 0 && v[ini - 1] !== '\n' ? '\n\n' : '') + '## ' + (sel || 'Subtítulo') + '\n\n';
+    else nuevo = (ini > 0 && v[ini - 1] !== '\n' ? '\n' : '') + (sel ? sel.split('\n').map(function (l) { return '- ' + l; }).join('\n') : '- ');
+    ta.value = v.slice(0, ini) + nuevo + v.slice(fin);
+    ta.focus(); ta.selectionStart = ta.selectionEnd = ini + nuevo.length;
+    estado.cambiosSinGuardar = true;
+  };
+});
+
+function leerFormulario() {
+  var x = clonar(editando);
+  x.titulo = $('e-titulo').value.trim();
+  x.contenido = $('e-texto').value.replace(/\r/g, '').trim();
+  x.video = $('e-video').value.trim();
+  var en = $('e-enlace').value.trim();
+  if (en) { x.enlace = en; x.textoEnlace = $('e-textoenlace').value.trim() || 'Más información'; } else { x.enlace = ''; x.textoEnlace = ''; }
+  if (tipoEdit === 'noticia') {
+    x.categoria = $('e-categoria').value.trim() || 'Noticia';
+    x.fecha = $('e-fecha').value || hoy();
+  } else {
+    x.tituloCorto = $('e-corto').value.trim(); x.etiqueta = $('e-etiqueta').value.trim() || 'Proyecto'; x.resumen = $('e-resumen').value.trim();
+    x.orden = parseInt($('e-orden').value, 10) || 1; x.enMenu = $('e-menu').checked; x.enInicio = $('e-inicio').checked; x.apoyo = $('e-apoyo').checked;
+    x.tituloGaleria = $('e-tgaleria').value.trim(); x.notaGaleria = $('e-ngaleria').value.trim();
+  }
+  return x;
+}
+function validar(x) {
+  if (!x.titulo) return 'Escriba el título.';
+  if (!x.contenido) return 'Escriba el texto.';
+  if (x.video && !F.idYoutube(x.video)) return 'La dirección del video no parece de YouTube. Cópiela desde el botón «Compartir» del video.';
+  if (x.enlace && !/^https?:\/\//.test(x.enlace)) return 'El enlace del botón debe empezar por https://';
+  return '';
+}
+function asignarSlug(x, lista) {
+  if (x.slug) return;
+  var base = F.slugify(x.titulo) || (tipoEdit === 'noticia' ? 'noticia' : 'proyecto');
+  if (F.RESERVADAS.indexOf(base) >= 0) base = (tipoEdit === 'noticia' ? 'noticia-' : 'proyecto-') + base;
+  var s = base, n = 2;
+  while (lista.some(function (y) { return y.slug === s; })) s = base + '-' + (n++);
+  x.slug = s;
+}
+$('btn-cancelar').onclick = function () {
+  if (estado.cambiosSinGuardar && !confirm('¿Descartar los cambios?')) return;
+  Object.keys(nuevasImagenes).forEach(function (r) { if (!usada(r)) delete nuevasImagenes[r]; });
+  borrarRutas = []; estado.cambiosSinGuardar = false; verPanel(pestanaLista);
+};
+$('btn-vista').onclick = function () {
+  var x = leerFormulario(); var err = validar(x); if (err) { aviso('aviso-editor', 'error', err); return; }
+  if (!x.slug) x.slug = 'vista-previa';
+  var datos = { proyectos: estado.proyectos, noticias: estado.noticias };
+  var html = tipoEdit === 'noticia' ? F.paginaNoticia(estado.sitio, datos, x, new Date().getFullYear()) : F.paginaProyecto(estado.sitio, datos, x, new Date().getFullYear());
+  Object.keys(nuevasImagenes).forEach(function (r) { html = html.split(r).join(nuevasImagenes[r]); });
+  html = html.replace('<head>', '<head><base href="' + location.origin + '/">');
+  html = html.replace('<body>', '<body><div style="background:#14A38B;color:#fff;text-align:center;padding:8px;font-weight:700;font-family:sans-serif">VISTA PREVIA — todavía no está publicada</div>');
+  var w = window.open('', '_blank');
+  if (!w) { aviso('aviso-editor', 'error', 'El navegador bloqueó la ventana de vista previa. Permita las ventanas emergentes para este sitio.'); return; }
+  w.document.open(); w.document.write(html); w.document.close();
+};
+$('btn-publicar').onclick = function () {
+  var x = leerFormulario(); var err = validar(x); if (err) { aviso('aviso-editor', 'error', err); return; }
+  var cand = candidato(); var lista = tipoEdit === 'noticia' ? cand.noticias : cand.proyectos;
+  asignarSlug(x, lista);
+  var i = lista.findIndex(function (y) { return y.slug === x.slug; });
+  if (i >= 0 && !esNueva) lista[i] = x; else lista.push(x);
+  var dir = tipoEdit === 'noticia' ? '/noticias/' + x.slug + '/' : '/' + x.slug + '/';
+  publicar(cand, (esNueva ? 'Nuevo: ' : 'Edición: ') + x.titulo, 'aviso-editor', function () { pintarListas(); verPanel(pestanaLista); })
+    .then(function (ok) { if (ok) aviso('aviso-panel', 'ok', '✔ Publicado. En 1 o 2 minutos podrá verlo en ' + F.SITIO + dir); });
+};
+function eliminar(tipo, x) {
+  if (!confirm('¿Eliminar definitivamente «' + x.titulo + '»? Su página dejará de existir en la web.')) return;
+  tipoEdit = tipo;
+  var cand = candidato();
+  if (tipo === 'noticia') cand.noticias = cand.noticias.filter(function (y) { return y.slug !== x.slug; });
+  else cand.proyectos = cand.proyectos.filter(function (y) { return y.slug !== x.slug; });
+  borrarRutas = [];
+  if (x.portada) marcarBorrar(x.portada);
+  (x.fotos || []).forEach(marcarBorrarFoto);
+  publicar(cand, 'Eliminado: ' + x.titulo, 'aviso-panel', pintarListas).then(function (ok) { if (!ok) borrarRutas = []; });
+}
+
+/* ---------- General ---------- */
+function pintarGeneral() {
+  var s = estado.sitio, c = s.contacto || {};
+  $('g-herotitulo').value = s.heroTitulo || ''; $('g-herotexto').value = s.heroTexto || '';
+  $('g-herofoto-vista').src = srcImagen(pendientesGeneral.heroFoto || s.heroFoto);
+  $('g-nostitulo').value = s.nosotrosTitulo || ''; $('g-nostexto').value = s.nosotrosTexto || '';
+  $('g-nosfoto-vista').src = srcImagen(pendientesGeneral.nosotrosFoto || s.nosotrosFoto);
+  $('c-direccion').value = c.direccion || ''; $('c-correo').value = c.correo || ''; $('c-whatsapp').value = c.whatsapp || ''; $('c-instagram').value = c.instagram || '';
+  $('g-llave').value = s.llave || ''; $('g-nit').value = s.nit || '';
+  var cif = $('g-cifras'); cif.innerHTML = '';
+  var lista = (s.indicadores || []).slice(); while (lista.length < 4) lista.push({ valor: '', texto: '' });
+  lista.slice(0, 4).forEach(function (x) {
+    var d = document.createElement('div'); d.className = 'cifra-fila';
+    d.innerHTML = '<input type="text" placeholder="Número" data-c="valor"><input type="text" placeholder="Descripción" data-c="texto">';
+    d.querySelector('[data-c=valor]').value = x.valor; d.querySelector('[data-c=texto]').value = x.texto; cif.appendChild(d);
+  });
+  $('g-testimonios').innerHTML = ''; (s.testimonios || []).forEach(filaTestimonio);
+}
+function filaTestimonio(t) {
+  t = t || { texto: '', autor: '' };
+  var d = document.createElement('div'); d.className = 'testimonio-fila';
+  d.innerHTML = '<textarea data-t="texto" placeholder="Lo que dijo la persona" style="min-height:80px"></textarea><input type="text" data-t="autor" placeholder="Quién lo dijo (sin nombre completo si es un menor o un paciente)">';
+  d.querySelector('[data-t=texto]').value = t.texto; d.querySelector('[data-t=autor]').value = t.autor;
+  d.appendChild(boton('Quitar', 'b-peligro b-chico', function () { d.remove(); estado.cambiosSinGuardar = true; }));
+  $('g-testimonios').appendChild(d);
+}
+$('btn-mas-testimonio').onclick = function () { filaTestimonio(); estado.cambiosSinGuardar = true; };
+document.querySelector('[data-panel=general]').addEventListener('input', function () { estado.cambiosSinGuardar = true; });
+function fotoGeneral(input, campo, vista, max) {
+  $(input).addEventListener('change', function () {
+    var a = this.files && this.files[0]; this.value = ''; if (!a) return;
+    reducirImagen(a, max, 0.84).then(function (d) {
+      var ruta = '/img/inicio/' + nombreUnico(campo === 'heroFoto' ? 'portada' : 'nosotros');
+      marcarBorrar(estado.sitio[campo]);
+      nuevasImagenes[ruta] = d; pendientesGeneral[campo] = ruta; $(vista).src = d; estado.cambiosSinGuardar = true;
+    }).catch(function (e) { aviso('aviso-general', 'error', e.message); });
+  });
+}
+fotoGeneral('g-herofoto', 'heroFoto', 'g-herofoto-vista', 1800);
+fotoGeneral('g-nosfoto', 'nosotrosFoto', 'g-nosfoto-vista', 1200);
+$('btn-guardar-general').onclick = function () {
+  var cand = candidato(); var s = cand.sitio;
+  if (pendientesGeneral.heroFoto) s.heroFoto = pendientesGeneral.heroFoto;
+  if (pendientesGeneral.nosotrosFoto) s.nosotrosFoto = pendientesGeneral.nosotrosFoto;
+  s.heroTitulo = $('g-herotitulo').value.trim(); s.heroTexto = $('g-herotexto').value.trim();
+  s.nosotrosTitulo = $('g-nostitulo').value.trim(); s.nosotrosTexto = $('g-nostexto').value.trim();
+  s.indicadores = Array.prototype.map.call(document.querySelectorAll('#g-cifras .cifra-fila'), function (d) { return { valor: d.querySelector('[data-c=valor]').value.trim(), texto: d.querySelector('[data-c=texto]').value.trim() }; }).filter(function (x) { return x.valor; });
+  s.testimonios = Array.prototype.map.call(document.querySelectorAll('.testimonio-fila'), function (d) { return { texto: d.querySelector('[data-t=texto]').value.trim(), autor: d.querySelector('[data-t=autor]').value.trim() }; }).filter(function (x) { return x.texto; });
+  s.contacto = { direccion: $('c-direccion').value.trim(), correo: $('c-correo').value.trim(), whatsapp: $('c-whatsapp').value.replace(/\D/g, ''), instagram: $('c-instagram').value.trim() };
+  s.llave = $('g-llave').value.trim(); s.nit = $('g-nit').value.trim();
+  if (!s.heroTitulo) { aviso('aviso-general', 'error', 'Escriba el título grande de la portada.'); return; }
+  if (s.contacto.correo && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.contacto.correo)) { aviso('aviso-general', 'error', 'Revise el correo.'); return; }
+  if (s.contacto.instagram && !/^https?:\/\//.test(s.contacto.instagram)) { aviso('aviso-general', 'error', 'La dirección de Instagram debe empezar por https://'); return; }
+  if (!s.llave) { aviso('aviso-general', 'error', 'Escriba la llave Bre-B: la usan los botones de donación.'); return; }
+  publicar(cand, 'Actualización de inicio, cifras y contacto', 'aviso-general', pintarGeneral);
+};
+
+/* ---------- Revista ---------- */
+function pintarRevista() {
+  var r = estado.sitio.revista || {};
+  $('r-titulo').value = r.titulo || ''; $('r-issn').value = r.issn || ''; $('r-editor').value = r.editor || ''; $('r-periodicidad').value = r.periodicidad || '';
+  $('r-acceso').value = r.acceso || ''; $('r-web').value = r.sitioWeb || ''; $('r-correo').value = r.correo || ''; $('r-lugar').value = r.lugar || '';
+}
+document.querySelector('[data-panel=revista]').addEventListener('input', function () { estado.cambiosSinGuardar = true; });
+$('btn-guardar-revista').onclick = function () {
+  var cand = candidato();
+  cand.sitio.revista = { titulo: $('r-titulo').value.trim(), issn: $('r-issn').value.trim(), editor: $('r-editor').value.trim(), periodicidad: $('r-periodicidad').value.trim(),
+    acceso: $('r-acceso').value.trim(), sitioWeb: $('r-web').value.trim(), correo: $('r-correo').value.trim(), lugar: $('r-lugar').value.trim() };
+  if (!cand.sitio.revista.titulo || !cand.sitio.revista.issn) { aviso('aviso-revista', 'error', 'El título y el ISSN son obligatorios: esta página la revisa Latindex.'); return; }
+  if (!confirm('Esta ficha la usa Latindex. ¿Confirma que los datos son oficiales?')) return;
+  publicar(cand, 'Actualización de la ficha de la revista', 'aviso-revista', pintarRevista);
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+ "nombre": "Fundación Reina Elizabeth ONG",
+ "nombreCorto": "Fundación Reina Elizabeth",
+ "lema": "Donde nace la esperanza",
+ "descripcion": "Fundación sin ánimo de lucro en Santa Marta: apoyo a niños con neurodivergencia e inclusión a través del arte.",
+ "descripcionPie": "Organización sin ánimo de lucro con sede en Santa Marta, comprometida con la inclusión de la neurodiversidad, el arte y el bienestar de las comunidades más vulnerables.",
+ "nit": "901849725",
+ "heroTitulo": "Donde nace la esperanza",
+ "heroTexto": "Transformamos vidas con inclusión y esperanza: acompañamos a niños con neurodivergencia y a sus familias y llevamos el arte a quienes más lo necesitan.",
+ "heroFoto": "/img/rostros/santa-marta-17.jpg",
+ "indicadores": [
+  {
+   "valor": "7",
+   "texto": "Países"
+  },
+  {
+   "valor": "5.287",
+   "texto": "Personas beneficiadas"
+  },
+  {
+   "valor": "38",
+   "texto": "Proyectos ejecutados"
+  }
+ ],
+ "nosotrosTitulo": "Comprometidos con el bienestar humano",
+ "nosotrosTexto": "Somos personas de distintos lugares del mundo que comprendemos el sufrimiento de los más vulnerables. Desde Santa Marta trabajamos para que cada niño, cada familia y cada comunidad tengan oportunidades reales de crecer.\n\n- **Educamos, acompañamos y construimos futuro**, por una sociedad más humana y solidaria.\n- **Cada persona cuenta y cada historia es valiosa:** juntos construimos oportunidades.\n- **Un presente con sentido, un futuro con esperanza:** las comunidades menos favorecidas se benefician de nuestros proyectos sociales.",
+ "nosotrosFoto": "/img/rostros/santa-marta-04.jpg",
+ "testimonios": [
+  {
+   "texto": "El equipo de la Fundación Reina Elizabeth nos enseñó a comprender mejor las necesidades de nuestro niño con autismo. Ahora toda la familia participa en su proceso.",
+   "autor": "Madre participante del programa de bienestar comunitario"
+  },
+  {
+   "texto": "¡Conocimos la inclusión a través del arte!",
+   "autor": "Participante del proyecto Rostros del Arte: Sin Límites, cofinanciado por MinCulturas y el Fondo Mixto de Cultura de Boyacá"
+  }
+ ],
+ "llave": "0088001153",
+ "contacto": {
+  "direccion": "Calle 22 No. 18-18, Santa Marta (Magdalena), Colombia",
+  "correo": "contacto@fundacionreinaelizabeth.com",
+  "whatsapp": "3128886611",
+  "instagram": "https://www.instagram.com/fundacionreinaelizabethong"
+ },
+ "revista": {
+  "titulo": "Revista Colombiana de Medicina",
+  "issn": "2500-4751 (en línea) · 2027-5188 (impreso)",
+  "editor": "Ricardo Londoño González, médico",
+  "periodicidad": "Bimestral",
+  "acceso": "Acceso abierto y gratuito para autores y lectores, licencia CC BY-NC 4.0",
+  "sitioWeb": "https://revistacolombianademedicina.com",
+  "correo": "contacto@revistacolombianademedicina.com",
+  "lugar": "Santa Marta (Magdalena), Colombia"
+ }
+}
