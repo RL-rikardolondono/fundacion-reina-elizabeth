@@ -103,7 +103,7 @@
       '<div><h4>La Fundación</h4><ul>' + proyectos +
       (datos.noticias.length ? '<li><a href="/noticias/">Noticias</a></li>' : '') +
       '<li><a href="/publicaciones/">Publicaciones</a></li><li><a href="/donar/">Donar</a></li></ul></div>' +
-      '</div><div class="legal"><span>© ' + anio + ' ' + esc(sitio.nombre) + ' · Santa Marta, Colombia</span>' +
+      '</div><div class="legal"><span>© ' + anio + ' ' + esc(sitio.nombre) + ' · Santa Marta, Colombia · <a href="/admin/" rel="nofollow">Ingresar (equipo)</a></span>' +
       '<a class="skynet" href="https://skynetgenesis.com" target="_blank" rel="noopener">' + ICO.skynet +
       '<span>Sitio desarrollado por <span class="sn"><b>SKYNET</b> <i>GENESIS</i></span> · contacto@skynetgenesis.com · WhatsApp 304 437 5758</span></a>' +
       '</div></div></footer>' +
