@@ -83,7 +83,7 @@
       '<a class="marca" href="/"><img src="/img/logo/logo-fundacion.png" alt="" width="44" height="44">' +
       '<span><b>' + esc(sitio.nombreCorto || sitio.nombre) + '</b><small>' + esc(sitio.lema) + '</small></span></a>' +
       '<button class="hamb" aria-label="Abrir menú" aria-expanded="false">&#9776;</button>' +
-      '<ul class="menu">' + lis + '<li><a href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Agenda de trabajo del equipo">Agenda-IA (equipo)</a></li><li><a class="btn-donar" style="background:var(--azul)" href="https://radar-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Radar-IA: convocatorias y financiación para nuestras empresas">Radar-IA</a></li><li><a class="btn-donar' + (activo === 'donar' ? ' activo' : '') + '" href="/donar/">Donar</a></li></ul>' +
+      '<ul class="menu">' + lis + '<li><a href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Agenda de trabajo del equipo">Agenda-IA (equipo)</a></li><li><a class="btn-donar" style="background:var(--azul)" href="https://radar-ia.skynetgenesis.com/#ingresar" target="_blank" rel="noopener" title="Radar-IA: convocatorias y financiación para nuestras empresas">Radar-IA</a></li><li><a class="btn-donar' + (activo === 'donar' ? ' activo' : '') + '" href="/donar/">Donar</a></li></ul>' +
       '</div></header>';
   }
 
@@ -103,7 +103,7 @@
       '<div><h4>La Fundación</h4><ul>' + proyectos +
       (datos.noticias.length ? '<li><a href="/noticias/">Noticias</a></li>' : '') +
       '<li><a href="/publicaciones/">Publicaciones</a></li><li><a href="/donar/">Donar</a></li></ul></div>' +
-      '</div><div class="legal"><span>© ' + anio + ' ' + esc(sitio.nombre) + ' · Santa Marta, Colombia · <a href="/admin/" rel="nofollow">Ingresar (equipo)</a> · <a href="https://radar-ia.skynetgenesis.com/" rel="nofollow">Radar-IA (convocatorias)</a></span>' +
+      '</div><div class="legal"><span>© ' + anio + ' ' + esc(sitio.nombre) + ' · Santa Marta, Colombia · <a href="/admin/" rel="nofollow">Ingresar (equipo)</a> · <a href="https://radar-ia.skynetgenesis.com/#ingresar" rel="nofollow">Radar-IA (convocatorias)</a></span>' +
       '<a class="skynet" href="https://skynetgenesis.com" target="_blank" rel="noopener">' + ICO.skynet +
       '<span>Sitio desarrollado por <span class="sn"><b>SKYNET</b> <i>GENESIS</i></span> · contacto@skynetgenesis.com · WhatsApp 304 437 5758</span></a>' +
       '</div></div></footer>' +
