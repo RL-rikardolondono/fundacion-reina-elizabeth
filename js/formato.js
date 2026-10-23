@@ -83,7 +83,7 @@
       '<a class="marca" href="/"><img src="/img/logo/logo-fundacion.png" alt="" width="44" height="44">' +
       '<span><b>' + esc(sitio.nombreCorto || sitio.nombre) + '</b><small>' + esc(sitio.lema) + '</small></span></a>' +
       '<button class="hamb" aria-label="Abrir menú" aria-expanded="false">&#9776;</button>' +
-      '<ul class="menu">' + lis + '<li><a href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Agenda de trabajo del equipo">Agenda-IA (equipo)</a></li><li><a class="btn-donar' + (activo === 'donar' ? ' activo' : '') + '" href="/donar/">Donar</a></li></ul>' +
+      '<ul class="menu">' + lis + '<li><a href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Agenda de trabajo del equipo">Agenda-IA (equipo)</a></li><li><a class="btn-donar" style="background:var(--azul)" href="https://radar-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Radar-IA: convocatorias y financiación para nuestras empresas">Radar-IA</a></li><li><a class="btn-donar' + (activo === 'donar' ? ' activo' : '') + '" href="/donar/">Donar</a></li></ul>' +
       '</div></header>';
   }
 
