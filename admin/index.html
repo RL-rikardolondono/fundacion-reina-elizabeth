@@ -96,30 +96,46 @@ input[type=number]{font:inherit}
 <main>
   <!-- INGRESO -->
   <section id="vista-ingreso" class="ingreso">
-    <div class="caja">
+    <div class="caja" id="caja-entrar">
       <h1>Entrar al panel</h1>
-      <p>Escriba su correo y su contraseña del panel.</p>
-      <label for="i-correo">Correo</label>
-      <input type="email" id="i-correo" autocomplete="username">
-      <label for="i-clave">Contraseña</label>
-      <input type="password" id="i-clave" autocomplete="current-password">
+      <p>Entre con su correo y su contraseña del panel.</p>
+      <label for="ing-correo">Correo</label>
+      <input type="email" id="ing-correo" autocomplete="username">
+      <label for="ing-clave">Contraseña</label>
+      <input type="password" id="ing-clave" autocomplete="current-password">
       <label class="chk"><input type="checkbox" id="recordar" checked> Recordar en este equipo (no lo marque en computadores ajenos)</label>
       <div id="aviso-ingreso"></div>
       <div class="pie-acciones"><button class="boton b-principal b-grande" id="btn-entrar" type="button">Entrar</button></div>
-      <p class="ayuda">¿Olvidó la contraseña? Pídale a otra persona con acceso que se la cambie en la pestaña «Usuarios», o escriba a SkyNet Genesis: contacto@skynetgenesis.com · WhatsApp 3044375758.</p>
+      <p class="ayuda" style="margin-top:14px"><a href="#" id="btn-olvido">¿Olvidó su contraseña?</a> · <a href="#" id="btn-primera">¿Primera vez? Crear mi contraseña</a></p>
+      <p class="ayuda">Soporte: SkyNet Genesis · contacto@skynetgenesis.com · WhatsApp 3044375758</p>
     </div>
-    <details class="caja">
-      <summary><b>Configuración inicial (solo la primera vez)</b></summary>
-      <p class="ayuda">Si todavía nadie tiene usuario, entre una sola vez con la llave de GitHub de esta web y cree los usuarios en la pestaña «Usuarios».</p>
+
+    <div class="caja oculto" id="caja-nueva">
+      <h1>Crear nueva contraseña</h1>
+      <p>Escriba su nueva contraseña del panel (mínimo 8 caracteres).</p>
+      <label for="nueva-clave">Nueva contraseña</label>
+      <input type="password" id="nueva-clave" autocomplete="new-password">
+      <label for="nueva-clave2">Repita la contraseña</label>
+      <input type="password" id="nueva-clave2" autocomplete="new-password">
+      <div id="aviso-nueva"></div>
+      <div class="pie-acciones"><button class="boton b-principal b-grande" id="btn-clave-nueva" type="button">Guardar y entrar</button></div>
+    </div>
+
+    <div class="caja oculto" id="caja-llave">
+      <h1>Configuración inicial (solo una vez)</h1>
+      <p>Para que el panel pueda publicar en la web, GitHub necesita una llave de acceso. Se pega <b>una sola vez</b>: queda guardada de forma segura en el servidor y nadie tendrá que volver a verla.</p>
+      <ol class="pasos">
+        <li>Inicie sesión en GitHub y abra <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">esta página</a>.</li>
+        <li>En <b>Token name</b> escriba: <i>Panel Fundación Reina Elizabeth</i>. En <b>Expiration</b> elija <b>No expiration</b>.</li>
+        <li>En <b>Repository access</b> elija <b>Only select repositories</b> y marque solo <b>fundacion-reina-elizabeth</b>.</li>
+        <li>En <b>Permissions → Repository permissions</b>, ponga <b>Contents</b> en <b>Read and write</b>. Nada más.</li>
+        <li>Pulse <b>Generate token</b>, copie la llave (empieza por <code>github_pat_</code>) y péguela aquí abajo.</li>
+      </ol>
       <label for="llave">Llave de GitHub</label>
       <input type="password" id="llave" autocomplete="off" placeholder="github_pat_…">
-      <div class="pie-acciones"><button class="boton b-borde" id="btn-entrar-llave" type="button">Entrar con la llave</button></div>
-      <ol class="pasos ayuda">
-        <li>Cree la llave en <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a> con el nombre <i id="nombre-llave"></i>, sin vencimiento.</li>
-        <li>En <b>Repository access</b> elija <b>Only select repositories</b> y marque solo <b id="nombre-repo"></b>.</li>
-        <li>En <b>Contents</b> elija <b>Read and write</b> y pulse <b>Generate token</b>.</li>
-      </ol>
-    </details>
+      <div id="aviso-llave"></div>
+      <div class="pie-acciones"><button class="boton b-principal b-grande" id="btn-llave" type="button">Guardar y entrar</button></div>
+    </div>
   </section>
 
   <!-- PANEL -->
@@ -129,7 +145,7 @@ input[type=number]{font:inherit}
       <button class="pestana" role="tab" aria-selected="false" data-pestana="proyectos">Programas y proyectos</button>
       <button class="pestana" role="tab" aria-selected="false" data-pestana="general">Inicio, cifras y contacto</button>
       <button class="pestana" role="tab" aria-selected="false" data-pestana="revista">Revista</button>
-      <button class="pestana" role="tab" aria-selected="false" data-pestana="usuarios">Usuarios</button>
+      
     </div>
     <div id="aviso-panel"></div>
 
@@ -316,8 +332,7 @@ input[type=number]{font:inherit}
 
 <div class="cargando oculto" id="cargando"><div class="rueda"></div><div id="cargando-texto">Cargando…</div></div>
 
-<script src="/js/formato.js"></script>
-<script src="/admin/acceso.js"></script>
+<script src="/js/formato.js?t=20261114"></script>
 <script>
 /* ===== Configuración de esta web (cambiar solo esto al copiar el panel a otra web) ===== */
 var CONFIG = {
@@ -325,7 +340,11 @@ var CONFIG = {
   repo: 'fundacion-reina-elizabeth',     // repositorio de la web
   rama: 'main',
   sitio: 'fundacionreinaelizabeth.com',
-  claveLocal: 'panel-fundacion-llave'
+  claveLocal: 'panel-fundacion-sesion',
+  claveLocalVieja: 'panel-fundacion-llave',
+  sitioId: 'fundacion',                         // nombre de esta web en el servicio de ingreso
+  correo: 'rikardolondono@gmail.com',           // correo que entra al panel
+  ingreso: 'https://skynetgenesis.com/ingreso/api.php'   // servicio central de ingreso de SkyNet Genesis
 };
 /* ======================================================================================= */
 
@@ -346,8 +365,6 @@ function clonar(o) { return JSON.parse(JSON.stringify(o)); }
 function boton(txt, clases, fn) { var b = document.createElement('button'); b.type = 'button'; b.className = 'boton ' + clases; b.textContent = txt; b.onclick = fn; return b; }
 
 $('nombre-sitio').textContent = CONFIG.sitio;
-$('nombre-repo').textContent = CONFIG.repo;
-$('nombre-llave').textContent = 'Panel ' + CONFIG.sitio;
 
 /* ---------- GitHub ---------- */
 function gh(ruta, op) {
@@ -440,49 +457,100 @@ function publicar(cand, mensaje, avisoId, alTerminar) {
   });
 }
 
-/* ---------- Ingreso ---------- */
-function entrar(llave, recordar) {
-  estado.llave = llave.trim();
-  if (!/^(github_pat_|ghp_)/.test(estado.llave)) { aviso('aviso-ingreso', 'error', 'Eso no parece una llave de GitHub. Debe empezar por «github_pat_».'); return; }
+/* ---------- Ingreso (correo y contraseña por el servicio central de SkyNet Genesis) ---------- */
+function api(accion, datos) {
+  datos = datos || {}; datos.sitio = CONFIG.sitioId; datos.accion = accion;
+  return fetch(CONFIG.ingreso + '?sitio=' + encodeURIComponent(CONFIG.sitioId), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos), cache: 'no-store' })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) { var e = new Error(j.error || 'No se pudo conectar con el servicio de ingreso. Intente de nuevo.'); e.status = r.status; throw e; } return j; }); },
+          function () { throw new Error('No hay conexión a internet. Intente de nuevo.'); });
+}
+function verCaja(id) { ['caja-entrar', 'caja-nueva', 'caja-llave'].forEach(function (c) { $(c).classList.toggle('oculto', c !== id); }); $('vista-ingreso').classList.remove('oculto'); }
+function guardarSesion(s, recordar) { borrarLS(CONFIG.claveLocal); guardarLS(CONFIG.claveLocal, s, recordar); }
+function trasIngreso(r) {
+  if (!r.configurado || !r.llave) { cargando(false); verCaja('caja-llave'); return; }
+  cargarPanel(r.llave);
+}
+function cargarPanel(llave) {
+  estado.llave = llave;
   cargando(true, 'Entrando…');
   gh('').then(function (repo) {
     if (repo.permissions && !repo.permissions.push) throw errorGH(403);
-    return Promise.all([refActual(), leerArchivo('datos/sitio.json'), leerArchivo('datos/proyectos.json'), leerArchivo('datos/noticias.json'),
-      leerArchivo('admin/accesos.json').catch(function () { return '{"usuarios":[]}'; })]);
+    return Promise.all([refActual(), leerArchivo('datos/sitio.json'), leerArchivo('datos/proyectos.json'), leerArchivo('datos/noticias.json')]);
   }).then(function (r) {
     estado.commitBase = r[0];
     estado.sitio = JSON.parse(r[1]); estado.proyectos = JSON.parse(r[2]).proyectos || []; estado.noticias = JSON.parse(r[3]).noticias || [];
-    try { estado.accesos = JSON.parse(r[4]); } catch (x) { estado.accesos = { usuarios: [] }; } estado.accesos.usuarios = estado.accesos.usuarios || [];
-    guardarLS(CONFIG.claveLocal, estado.llave, recordar);
     $('vista-ingreso').classList.add('oculto'); $('vista-panel').classList.remove('oculto'); $('acciones-barra').classList.remove('oculto');
-    cargando(false); pintarListas(); pintarGeneral(); pintarRevista(); pintarUsuarios();
-    if (!estado.accesos.usuarios.length) { verPanel('usuarios'); aviso('aviso-panel', 'info', 'Primer paso: cree aquí su usuario y contraseña. Así podrá entrar desde cualquier computador o celular sin la llave de GitHub.'); }
+    cargando(false); pintarListas(); pintarGeneral(); pintarRevista();
   }).catch(function (e) {
     cargando(false); estado.llave = '';
-    if (e.status === 401) borrarLS(CONFIG.claveLocal);
-    $('vista-ingreso').classList.remove('oculto');
-    aviso('aviso-ingreso', 'error', e.status === 401 ? 'El acceso de esta web cambió. Pida a SkyNet Genesis que lo renueve (contacto@skynetgenesis.com · WhatsApp 3044375758).' : e.message);
+    if (e.status === 401 || e.status === 403 || e.status === 404) { verCaja('caja-llave'); aviso('aviso-llave', 'error', 'La llave de GitHub guardada ya no funciona (' + e.message + ') Cree una nueva y péguela aquí.'); return; }
+    verCaja('caja-entrar'); aviso('aviso-ingreso', 'error', e.message);
   });
 }
-// Ingreso normal: correo y contraseña
+$('ing-correo').value = CONFIG.correo;
 $('btn-entrar').onclick = function () {
-  var correo = $('i-correo').value, clave = $('i-clave').value;
+  var correo = $('ing-correo').value.trim(), clave = $('ing-clave').value, recordar = $('recordar').checked;
   if (!correo || !clave) { aviso('aviso-ingreso', 'error', 'Escriba su correo y su contraseña.'); return; }
-  cargando(true, 'Verificando…');
-  Acceso.leer().then(function (acc) { return Acceso.abrir(acc, correo, clave); })
-    .then(function (r) { cargando(false); estado.usuario = r.nombre; entrar(r.llave, $('recordar').checked); })
-    .catch(function (e) { cargando(false); aviso('aviso-ingreso', 'error', e.message); });
+  cargando(true, 'Entrando…'); aviso('aviso-ingreso', '', '');
+  api('entrar', { correo: correo, clave: clave, recordar: recordar }).then(function (r) {
+    $('ing-clave').value = ''; guardarSesion(r.sesion, recordar); trasIngreso(r);
+  }).catch(function (e) { cargando(false); aviso('aviso-ingreso', 'error', e.message); });
 };
-['i-correo', 'i-clave'].forEach(function (id) { $(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar').click(); }); });
-// Configuración inicial con la llave de GitHub
-$('btn-entrar-llave').onclick = function () { entrar($('llave').value, $('recordar').checked); };
-$('llave').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar-llave').click(); });
+$('ing-clave').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar').click(); });
+function pedirEnlace(ev) {
+  ev.preventDefault();
+  var correo = $('ing-correo').value.trim();
+  if (!correo) { aviso('aviso-ingreso', 'error', 'Escriba primero su correo.'); return; }
+  cargando(true, 'Enviando el correo…');
+  api('solicitar', { correo: correo }).then(function () {
+    cargando(false);
+    aviso('aviso-ingreso', 'ok', 'Listo. Si ese correo tiene acceso al panel, le llegará en unos minutos un mensaje con un enlace para crear su contraseña. Revise también la carpeta de spam. El enlace vence en 1 hora.');
+  }).catch(function (e) { cargando(false); aviso('aviso-ingreso', 'error', e.message); });
+}
+$('btn-olvido').onclick = pedirEnlace;
+$('btn-primera').onclick = pedirEnlace;
+$('btn-clave-nueva').onclick = function () {
+  var c1 = $('nueva-clave').value, c2 = $('nueva-clave2').value;
+  if (c1.length < 8) { aviso('aviso-nueva', 'error', 'La contraseña debe tener al menos 8 caracteres.'); return; }
+  if (c1 !== c2) { aviso('aviso-nueva', 'error', 'Las dos contraseñas no coinciden.'); return; }
+  var codigo = (location.hash.match(/clave=([a-f0-9]+)/) || [])[1] || '';
+  cargando(true, 'Guardando…');
+  api('fijar', { codigo: codigo, clave: c1, recordar: true }).then(function (r) {
+    history.replaceState(null, '', location.pathname);
+    $('nueva-clave').value = $('nueva-clave2').value = '';
+    guardarSesion(r.sesion, true); trasIngreso(r);
+  }).catch(function (e) { cargando(false); aviso('aviso-nueva', 'error', e.message); });
+};
+$('btn-llave').onclick = function () {
+  var llave = $('llave').value.trim();
+  if (!/^(github_pat_|ghp_)/.test(llave)) { aviso('aviso-llave', 'error', 'Eso no parece una llave de GitHub. Debe empezar por «github_pat_».'); return; }
+  cargando(true, 'Comprobando la llave…');
+  api('guardar_llave', { sesion: leerLS(CONFIG.claveLocal), llave: llave }).then(function (r) {
+    $('llave').value = ''; cargarPanel(r.llave);
+  }).catch(function (e) {
+    cargando(false);
+    if (e.status === 401) { borrarLS(CONFIG.claveLocal); verCaja('caja-entrar'); aviso('aviso-ingreso', 'error', e.message); return; }
+    aviso('aviso-llave', 'error', e.message);
+  });
+};
 $('btn-salir').onclick = function () {
   if (estado.cambiosSinGuardar && !confirm('Tiene cambios sin publicar. ¿Salir de todos modos?')) return;
-  borrarLS(CONFIG.claveLocal); estado.cambiosSinGuardar = false; location.reload();
+  var s = leerLS(CONFIG.claveLocal); borrarLS(CONFIG.claveLocal); estado.cambiosSinGuardar = false;
+  (s ? api('salir', { sesion: s }).catch(function () {}) : Promise.resolve()).then(function () { location.reload(); });
 };
 window.addEventListener('beforeunload', function (e) { if (estado.cambiosSinGuardar) { e.preventDefault(); e.returnValue = ''; } });
-(function () { var g = leerLS(CONFIG.claveLocal); if (g) entrar(g, true); })();
+(function () {
+  window.addEventListener('hashchange', function () { if (/clave=[a-f0-9]+/.test(location.hash)) { $('vista-panel').classList.add('oculto'); $('acciones-barra').classList.add('oculto'); verCaja('caja-nueva'); } });
+  borrarLS(CONFIG.claveLocalVieja); // limpia la llave que antes se guardaba en el equipo
+  if (/clave=[a-f0-9]+/.test(location.hash)) { verCaja('caja-nueva'); return; }
+  var s = leerLS(CONFIG.claveLocal);
+  if (!s) { verCaja('caja-entrar'); return; }
+  cargando(true, 'Entrando…');
+  api('sesion', { sesion: s }).then(trasIngreso).catch(function (e) {
+    cargando(false); if (e.status === 401) borrarLS(CONFIG.claveLocal);
+    verCaja('caja-entrar'); if (e.status !== 401) aviso('aviso-ingreso', 'error', e.message);
+  });
+})();
 
 /* ---------- Pestañas ---------- */
 var pestanaLista = 'noticias';
