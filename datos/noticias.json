@@ -1,3 +1,40 @@
 {
- "noticias": []
+ "noticias": [
+  {
+   "slug": "diplomado-neurodivergencia-primera-cohorte",
+   "titulo": "Terminó la primera cohorte del diplomado en neurodivergencia",
+   "categoria": "Formación",
+   "fecha": "2026-10-30",
+   "contenido": "Del 13 al 30 de octubre de 2026 se realizó la primera cohorte del diplomado en neurodivergencia de la Fundación Reina Elizabeth ONG, con docentes, profesionales de la salud y familias.\n\nGracias a todas las personas que participaron. Ya estamos preparando la próxima cohorte: si le interesa, escríbanos y le avisamos las fechas.",
+   "portada": "/img/rostros/santa-marta-21.jpg",
+   "video": "",
+   "enlace": "/diplomado-neurodivergencia/",
+   "textoEnlace": "Conocer el diplomado",
+   "fotos": []
+  },
+  {
+   "slug": "vigias-del-patrimonio-museo-del-magdalena-acreditado",
+   "titulo": "Nuestro grupo de Vigías del Patrimonio fue acreditado por el Ministerio de las Culturas",
+   "categoria": "Patrimonio",
+   "fecha": "2026-09-21",
+   "contenido": "El Ministerio de las Culturas, las Artes y los Saberes acreditó por un año al grupo de Vigías del Patrimonio «Museo del Magdalena» de la Fundación Reina Elizabeth ONG (código IDNR_00752).\n\nLa acreditación reconoce el proyecto «Protección y puesta en valor de la Casa de Madame Augustine como nodo cultural del Museo del Magdalena», un inmueble del siglo XVIII en el Centro Histórico de Santa Marta.",
+   "portada": "",
+   "video": "",
+   "enlace": "/museo-del-magdalena/",
+   "textoEnlace": "Conocer el proyecto",
+   "fotos": []
+  },
+  {
+   "slug": "rostros-del-arte-cierre-2025",
+   "titulo": "Rostros del Arte: Sin Límite cerró con 635 beneficiarios en el Magdalena",
+   "categoria": "Proyecto",
+   "fecha": "2025-10-31",
+   "contenido": "El 31 de octubre de 2025 firmamos con el Ministerio de las Culturas, las Artes y los Saberes el acta de cierre del proyecto «Rostros del Arte: Sin Límite» (C10142-2025), que certifica el cumplimiento de su objeto.\n\nDurante 2025 llevamos talleres de artes plásticas inclusivos a Santa Marta, Ciénaga y Fundación (Magdalena). Participaron 635 personas, entre ellas 116 personas con discapacidad, y cada municipio cerró con una exposición de las obras.\n\nGracias a los colegios e instituciones aliadas, a los docentes, a las familias y, sobre todo, a los artistas que nos mostraron que el arte no tiene límites.",
+   "portada": "/img/rostros/santa-marta-04.jpg",
+   "video": "",
+   "enlace": "/rostros-del-arte/",
+   "textoEnlace": "Ver el proyecto y la galería",
+   "fotos": []
+  }
+ ]
 }

@@ -10,16 +10,20 @@
  "heroFoto": "/img/rostros/santa-marta-17.jpg",
  "indicadores": [
   {
-   "valor": "7",
-   "texto": "Países"
+   "valor": "635",
+   "texto": "Beneficiarios directos"
   },
   {
-   "valor": "5.287",
-   "texto": "Personas beneficiadas"
+   "valor": "116",
+   "texto": "Personas con discapacidad"
   },
   {
-   "valor": "38",
-   "texto": "Proyectos ejecutados"
+   "valor": "3",
+   "texto": "Municipios del Magdalena"
+  },
+  {
+   "valor": "1",
+   "texto": "Proyecto con MinCulturas"
   }
  ],
  "nosotrosTitulo": "Comprometidos con el bienestar humano",
@@ -32,7 +36,7 @@
   },
   {
    "texto": "¡Conocimos la inclusión a través del arte!",
-   "autor": "Participante del proyecto Rostros del Arte: Sin Límites, cofinanciado por MinCulturas y el Fondo Mixto de Cultura de Boyacá"
+   "autor": "Participante de Rostros del Arte: Sin Límite, proyecto apoyado por el Programa Nacional de Concertación Cultural del Ministerio de las Culturas (2025)"
   }
  ],
  "llave": "0088001153",
@@ -51,5 +55,44 @@
   "sitioWeb": "https://revistacolombianademedicina.com",
   "correo": "contacto@revistacolombianademedicina.com",
   "lugar": "Santa Marta (Magdalena), Colombia"
+ },
+ "transparencia": {
+  "intro": "Rendimos cuentas a nuestros donantes, aliados y comunidad. Aquí encuentra los datos legales de la Fundación y lo que hemos ejecutado con recursos públicos.",
+  "datos": [
+   {
+    "dato": "Razón social",
+    "valor": "Fundación Reina Elizabeth ONG"
+   },
+   {
+    "dato": "NIT",
+    "valor": "901.849.725-4"
+   },
+   {
+    "dato": "Naturaleza",
+    "valor": "Entidad sin ánimo de lucro (fundación)"
+   },
+   {
+    "dato": "Constitución",
+    "valor": "2 de julio de 2024, por documento privado de la Asamblea"
+   },
+   {
+    "dato": "Registro",
+    "valor": "Cámara de Comercio de Santa Marta para el Magdalena, inscripción S0509472 del 3 de julio de 2024; matrícula renovada para 2026"
+   },
+   {
+    "dato": "Entidad que ejerce vigilancia",
+    "valor": "Gobernación del Magdalena"
+   },
+   {
+    "dato": "Domicilio",
+    "valor": "Calle 22 No. 18-18, Santa Marta (Magdalena), Colombia"
+   },
+   {
+    "dato": "Correo",
+    "valor": "contacto@fundacionreinaelizabeth.com"
+   }
+  ],
+  "gestion": "## Proyectos ejecutados con recursos públicos\n\n- **Rostros del Arte: Sin Límite (2025).** Proyecto C10142-2025 del Programa Nacional de Concertación Cultural del Ministerio de las Culturas, las Artes y los Saberes, con acompañamiento del Fondo Mixto de Promoción de la Cultura y las Artes de Boyacá. Ejecutado del 20 de mayo al 8 de noviembre de 2025 en Santa Marta, Ciénaga y Fundación (Magdalena), con 635 beneficiarios directos. El Ministerio certificó el cumplimiento del objeto en el acta de cierre del 31 de octubre de 2025, sin reintegros.\n\n## Reconocimientos\n\n- **Grupo de Vigías del Patrimonio «Museo del Magdalena».** Inscrito ante el Ministerio de las Culturas (Dirección de Patrimonio y Memoria) el 26 de diciembre de 2025, código IDNR_00752, y acreditado el 21 de septiembre de 2026 por un año.",
+  "documentos": "## Documentos disponibles\n\nPuede solicitarnos sin costo una copia de los siguientes documentos:\n\n- Certificado de existencia y representación legal (Cámara de Comercio).\n- Estatutos de la Fundación.\n- Registro Único Tributario (RUT).\n- Acta de cierre del proyecto Rostros del Arte: Sin Límite (C10142-2025).\n\nLe respondemos por correo en un máximo de cinco días hábiles."
  }
 }

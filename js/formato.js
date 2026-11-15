@@ -9,7 +9,7 @@
   var VERSION = '3';
   var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   // Direcciones que no pueden usar los proyectos (ya son secciones fijas o redirecciones antiguas)
-  var RESERVADAS = ['admin', 'css', 'js', 'img', 'datos', 'noticias', 'publicaciones', 'donar', 'contacto', '404', 'index', 'sitemap', 'robots', 'cname',
+  var RESERVADAS = ['admin', 'css', 'js', 'img', 'datos', 'noticias', 'publicaciones', 'transparencia', 'donar', 'contacto', '404', 'index', 'sitemap', 'robots', 'cname',
     'blog', 'prohibidoolvidar', 'lecciones-del-silencio', 'rostros-del-arte-sin-limites', 'rostros-del-arte-sin-limites-santa-marta',
     'rostros-del-arte-sin-limites-cienaga', 'propuesta-dialogos-generacionales'];
 
@@ -83,7 +83,7 @@
       '<a class="marca" href="/"><img src="/img/logo/logo-fundacion.png" alt="" width="44" height="44">' +
       '<span><b>' + esc(sitio.nombreCorto || sitio.nombre) + '</b><small>' + esc(sitio.lema) + '</small></span></a>' +
       '<button class="hamb" aria-label="Abrir menú" aria-expanded="false">&#9776;</button>' +
-      '<ul class="menu">' + lis + '<li><a href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="noopener" title="Agenda de trabajo del equipo">Agenda-IA (equipo)</a></li><li><a class="btn-donar" style="background:var(--azul)" href="https://radar-ia.skynetgenesis.com/#ingresar" target="_blank" rel="noopener" title="Radar-IA: convocatorias y financiación para nuestras empresas">Radar-IA</a></li><li><a class="btn-donar' + (activo === 'donar' ? ' activo' : '') + '" href="/donar/">Donar</a></li></ul>' +
+      '<ul class="menu">' + lis + '<li><a class="btn-donar' + (activo === 'donar' ? ' activo' : '') + '" href="/donar/">Donar</a></li></ul>' +
       '</div></header>';
   }
 
@@ -102,8 +102,8 @@
       '</ul></div>' +
       '<div><h4>La Fundación</h4><ul>' + proyectos +
       (datos.noticias.length ? '<li><a href="/noticias/">Noticias</a></li>' : '') +
-      '<li><a href="/publicaciones/">Publicaciones</a></li><li><a href="/donar/">Donar</a></li></ul></div>' +
-      '</div><div class="legal"><span>© ' + anio + ' ' + esc(sitio.nombre) + ' · Santa Marta, Colombia · <a href="/admin/" rel="nofollow">Ingresar (equipo)</a> · <a href="https://radar-ia.skynetgenesis.com/#ingresar" rel="nofollow">Radar-IA (convocatorias)</a></span>' +
+      '<li><a href="/publicaciones/">Publicaciones</a></li><li><a href="/transparencia/">Transparencia</a></li><li><a href="/donar/">Donar</a></li></ul></div>' +
+      '</div><div class="legal"><span>© ' + anio + ' ' + esc(sitio.nombre) + ' · Santa Marta, Colombia · <a href="/admin/" rel="nofollow">Ingresar (equipo)</a> · <a href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="noopener nofollow">Agenda-IA (equipo)</a> · <a href="https://radar-ia.skynetgenesis.com/#ingresar" target="_blank" rel="noopener nofollow">Radar-IA (convocatorias)</a></span>' +
       '<a class="skynet" href="https://skynetgenesis.com" target="_blank" rel="noopener">' + ICO.skynet +
       '<span>Sitio desarrollado por <span class="sn"><b>SKYNET</b> <i>GENESIS</i></span> · contacto@skynetgenesis.com · WhatsApp 304 437 5758</span></a>' +
       '</div></div></footer>' +
@@ -269,6 +269,23 @@
     return documento(sitio, datos, { ruta: '/publicaciones/', activo: 'publicaciones', titulo: 'Publicaciones', descripcion: 'La ' + sitio.nombre + ' es la entidad editora de la ' + r.titulo + ' (ISSN ' + r.issn + ').', cuerpo: cuerpo, anio: anio });
   }
 
+  // Información legal y de gestión de la Fundación (datos/sitio.json → transparencia)
+  function paginaTransparencia(sitio, datos, anio) {
+    var t = sitio.transparencia || {};
+    var c = sitio.contacto || {};
+    var filas = (t.datos || []).filter(function (f) { return f && f.valor; });
+    var cuerpo = cab('Transparencia', 'Transparencia', t.intro || ('Información legal y de gestión de la ' + sitio.nombre + '.'), 'Transparencia') +
+      '<section class="bloque"><div class="wrap estrecho"><h2>Datos de la entidad</h2><div class="ficha"><dl>' +
+      filas.map(function (f) { return '<dt>' + esc(f.dato) + '</dt><dd>' + esc(f.valor) + '</dd>'; }).join('') +
+      '</dl></div>' +
+      (t.gestion ? '<div class="texto mt">' + textoAHtml(t.gestion) + '</div>' : '') +
+      '<div class="texto mt">' + textoAHtml(t.documentos || '') + '</div>' +
+      '<div class="botones mt"><a class="btn btn-primario" href="mailto:' + esc(c.correo) + '?subject=' + encodeURIComponent('Solicitud de documentos – Transparencia') + '">Solicitar documentos</a>' +
+      '<a class="btn btn-wa" href="' + wa(sitio, 'Hola, quisiera recibir documentos de transparencia de la Fundación Reina Elizabeth.') + '" target="_blank" rel="noopener">' + ICO.wa + ' Escribir por WhatsApp</a></div>' +
+      '</div></section>';
+    return documento(sitio, datos, { ruta: '/transparencia/', activo: 'transparencia', titulo: 'Transparencia', descripcion: 'Información legal, proyectos ejecutados y documentos de la ' + sitio.nombre + ' (NIT ' + sitio.nit + ').', cuerpo: cuerpo, anio: anio });
+  }
+
   function paginaDonar(sitio, datos, anio) {
     var c = sitio.contacto || {};
     var msg = 'Hola, acabo de hacer una donación a la Fundación Reina Elizabeth. Les envío el comprobante.';
@@ -322,7 +339,7 @@
   }
 
   function mapaDelSitio(datos) {
-    var urls = ['/', '/publicaciones/', '/donar/', '/contacto/'];
+    var urls = ['/', '/publicaciones/', '/transparencia/', '/donar/', '/contacto/'];
     datos.proyectos.forEach(function (p) { urls.push('/' + p.slug + '/'); });
     if (datos.noticias.length) { urls.push('/noticias/'); datos.noticias.forEach(function (n) { urls.push('/noticias/' + n.slug + '/'); }); }
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
@@ -337,6 +354,7 @@
     out['publicaciones/index.html'] = paginaPublicaciones(sitio, datos, anio);
     out['donar/index.html'] = paginaDonar(sitio, datos, anio);
     out['contacto/index.html'] = paginaContacto(sitio, datos, anio);
+    out['transparencia/index.html'] = paginaTransparencia(sitio, datos, anio);
     out['noticias/index.html'] = paginaNoticias(sitio, datos, anio);
     out['404.html'] = pagina404(sitio, datos, anio);
     datos.proyectos.forEach(function (p) { out[p.slug + '/index.html'] = paginaProyecto(sitio, datos, p, anio); });
