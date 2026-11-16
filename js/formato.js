@@ -75,7 +75,7 @@
     var items = [['inicio', '/', 'Inicio']];
     ordenarProyectos(datos.proyectos).forEach(function (p) { if (p.enMenu) items.push([p.slug, '/' + p.slug + '/', p.tituloCorto || p.titulo]); });
     if (datos.noticias.length) items.push(['noticias', '/noticias/', 'Noticias']);
-    items.push(['publicaciones', '/publicaciones/', 'Publicaciones'], ['contacto', '/contacto/', 'Contacto']);
+    items.push(['publicaciones', '/publicaciones/', 'Publicaciones'], ['biblioteca', 'https://biblioteca.fundacionreinaelizabeth.com/', 'Biblioteca'], ['contacto', '/contacto/', 'Contacto']);
     var lis = items.map(function (m) {
       return '<li><a href="' + m[1] + '"' + (m[0] === activo ? ' class="activo" aria-current="page"' : '') + '>' + esc(m[2]) + '</a></li>';
     }).join('');
