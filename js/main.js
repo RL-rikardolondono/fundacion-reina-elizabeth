@@ -1,7 +1,7 @@
 // Menú móvil
 (function(){
   var b=document.querySelector('.hamb'), m=document.querySelector('.menu');
-  if(b&&m){b.addEventListener('click',function(){var a=m.classList.toggle('abierto');b.setAttribute('aria-expanded',a);});}
+  if(b&&m){b.addEventListener('click',function(){var a=m.classList.toggle('abierto');b.setAttribute('aria-expanded',a);b.setAttribute('aria-label',a?'Cerrar menú':'Abrir menú');});}
 })();
 
 // Copiar llave Bre-B
