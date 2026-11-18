@@ -177,3 +177,5 @@ a.tarjeta:hover .enlace{color:var(--verde-osc)}
 .mt{margin-top:28px}
 .vacio{color:var(--suave)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* Correos y enlaces largos no deben desbordar en el celular */
+a[href^="mailto:"],.contacto a,.pie a{overflow-wrap:anywhere}
